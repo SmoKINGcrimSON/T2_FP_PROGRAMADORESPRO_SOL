@@ -1,0 +1,540 @@
+﻿<Window x:Class="T2_FP_PROGRAMADORESPRO.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:T2_FP_PROGRAMADORESPRO"
+        mc:Ignorable="d"
+        Title="T2_FUNPRO_PROGRAMADORESPRO" Height="450" Width="825" WindowStyle="None" AllowsTransparency="True" Background="Transparent" Icon="Images/MedicineAppLogo.png"
+        Name="MyWindow">
+    <Window.Resources>
+        <Style TargetType="Button" x:Key="_btn_style_modernstyle">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" Height="{TemplateBinding Height}" Width="{TemplateBinding Width}" CornerRadius="10">
+                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#2E2C83"/>
+                    <Setter Property="Foreground" Value="LightGray"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <Border Background="#85B4E8" CornerRadius="20">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="20*"/>
+            </Grid.RowDefinitions>
+            <!--Título de la app, botón de cerrar, botón de minimizar-->
+            <Grid Grid.Row="0">
+                <Grid.Resources>
+                    <Style TargetType="Button" x:Key="btnstyle_minimize" BasedOn="{StaticResource _btn_style_modernstyle}">
+                        <Setter Property="Background" Value="#68D14F"/>
+                        <Setter Property="Content" Value="-"/>
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="FontSize" Value="20"/>
+                        <Setter Property="VerticalContentAlignment" Value="Center"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#298113"/>
+                                <Setter Property="Foreground" Value="LightGray"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                    <Style TargetType="Button" x:Key="btnstyle_close" BasedOn="{StaticResource _btn_style_modernstyle}">
+                        <Setter Property="Background" Value="#E14848"/>
+                        <Setter Property="Content" Value="✗"/>
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="FontSize" Value="15"/>
+                        <Setter Property="VerticalContentAlignment" Value="Center"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#811313"/>
+                                <Setter Property="Foreground" Value="LightGray"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Grid.Resources>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="35"/>
+                    <ColumnDefinition Width="35"/>
+                    <ColumnDefinition Width="20"/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="1" Style="{StaticResource btnstyle_minimize}" x:Name="p_btn_minimize"/>
+                <Button Grid.Column="2" Style="{StaticResource btnstyle_close}" Margin="2,0,0,0" x:Name="p_btn_shutdown"/>
+            </Grid>
+            <!--Diseño visual para registrar y mostrar los medicamentos-->
+            <DockPanel Grid.Row="1">
+                
+                <StackPanel Margin="1,0,0,0">
+                    <!--Registro de medicamentos-->
+                    <StackPanel DockPanel.Dock="Left" Background="#5E92EE">
+                        <StackPanel Width="225" x:Name="p_StackPanel_Register">
+                            <StackPanel.Resources>
+                                <Style TargetType="Label">
+                                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                    <Setter Property="VerticalContentAlignment" Value="Center"/>
+                                    <Setter Property="Margin" Value="0,5,0,5"/>
+                                    <Setter Property="Foreground" Value="White"/>
+                                    <Setter Property="FontWeight" Value="Bold"/>
+                                    <Setter Property="FontSize" Value="13"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Foreground" Value="LightGray"/>
+                                        </Trigger>
+                                        <EventTrigger RoutedEvent="MouseEnter">
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimation Duration="0:0:0.100" Storyboard.TargetProperty="FontSize" To="15"/>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </EventTrigger>
+                                        <EventTrigger RoutedEvent="MouseLeave">
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimation Duration="0:0:0.100" Storyboard.TargetProperty="FontSize" To="13"/>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </EventTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </StackPanel.Resources>
+                            <Label Content="REGISTRO DE MEDICAMENTO" Height="30"/>
+                            <Grid Margin="0,10,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Grid.Resources>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Margin" Value="5,0,0,0"/>
+                                        <Setter Property="Foreground" Value="White"/>
+                                        <Setter Property="FontSize" Value="14"/>
+                                        <Setter Property="VerticalAlignment" Value="Bottom"/>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Foreground" Value="LightGray"/>
+                                            </Trigger>
+                                            <EventTrigger RoutedEvent="MouseEnter">
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation Duration="0:0:0.100" Storyboard.TargetProperty="FontSize" To="17"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
+                                            <EventTrigger RoutedEvent="MouseLeave">
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation Duration="0:0:0.100" Storyboard.TargetProperty="FontSize" To="14"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                    <Style TargetType="TextBox">
+                                        <Setter Property="Margin" Value="0,0,10,5"/>
+                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Setter Property="Foreground" Value="White"/>
+                                        <Setter Property="BorderBrush" Value="DarkGray"/>
+                                        <Setter Property="BorderThickness" Value="0,0,0,2"/>
+                                        <Setter Property="BorderBrush" Value="AliceBlue"/>
+                                        <Setter Property="VerticalAlignment" Value="Center"/>
+                                        <Setter Property="FontSize" Value="15"/>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Foreground" Value="LightGray"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Grid.Resources>
+                                <TextBlock Grid.Column="0" Text="nombre:"/>
+                                <TextBox Grid.Column="1" x:Name="p_txtbox_name"/>
+                                <TextBlock Grid.Column="0" Grid.Row="1" Text="precio:"/>
+                                <TextBox Grid.Column="1" Grid.Row="1" x:Name="p_txtbox_price"/>
+                                <TextBlock Grid.Column="0" Grid.Row="2" Text="cantidad:"/>
+                                <TextBox Grid.Column="1" Grid.Row="2" x:Name="p_txtbox_count"/>
+                            </Grid>
+                            <StackPanel Height="80">
+                                <StackPanel.Resources>
+                                    <Style x:Key="_btn_style_stckpanel" TargetType="Button" BasedOn="{StaticResource _btn_style_modernstyle}">
+                                        <Setter Property="Background" Value="#7875E7"/>
+                                        <Setter Property="Foreground" Value="White"/>
+                                        <Setter Property="Height" Value="40"/>
+                                        <Setter Property="Width" Value="120"/>
+                                        <Setter Property="FontSize" Value="15"/>
+                                        <Setter Property="VerticalAlignment" Value="Stretch"/>
+                                        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                                        <Style.Triggers>
+                                            <EventTrigger RoutedEvent="MouseEnter">
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation Duration="0:0:0.100" Storyboard.TargetProperty="Height" To="50"/>
+                                                        <DoubleAnimation Duration="0:0:0.100" Storyboard.TargetProperty="Width" To="130"/>
+                                                        <DoubleAnimation Duration="0:0:0.100" Storyboard.TargetProperty="FontSize" To="18"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
+                                            <EventTrigger RoutedEvent="MouseLeave">
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation Duration="0:0:0.100" Storyboard.TargetProperty="Height" To="40"/>
+                                                        <DoubleAnimation Duration="0:0:0.100" Storyboard.TargetProperty="Width" To="120"/>
+                                                        <DoubleAnimation Duration="0:0:0.100" Storyboard.TargetProperty="FontSize" To="15"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </StackPanel.Resources>
+                                <Button Margin="5,20,5,5" Content="REGISTRAR" Style="{StaticResource _btn_style_stckpanel}" x:Name="p_btn_register"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+                    <!--Visualizar el medicamento seleccionado seleccionado-->
+                    <Grid Width="225" Height="205">
+                        <Grid.Resources>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                                <Setter Property="FontSize" Value="13"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Foreground" Value="LightGray"/>
+                                    </Trigger>
+                                    <EventTrigger RoutedEvent="MouseEnter">
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation Duration="0:0:0.100" Storyboard.TargetProperty="FontSize" To="15"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
+                                    <EventTrigger RoutedEvent="MouseLeave">
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation Duration="0:0:0.100" Storyboard.TargetProperty="FontSize" To="13"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Grid.Resources>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="3*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="MEDICINE" Grid.ColumnSpan="2" FontWeight="Bold"/>
+                        <TextBlock Text="Nombre" Grid.Column="0" Grid.Row="1"/>
+                        <TextBlock Text="Código" Grid.Column="0" Grid.Row="2"/>
+                        <TextBlock Text="Precio unitario" Grid.Column="0" Grid.Row="3"/>
+                        <TextBlock Grid.Column="1" Grid.Row="1" x:Name="p_txt_visualize_name"/>
+                        <TextBlock Grid.Column="1" Grid.Row="2" x:Name="p_txt_visualize_code"/>
+                        <TextBlock Grid.Column="1" Grid.Row="3" x:Name="p_txt_visualize_unitprice"/>
+                        <Image Grid.Row="4" Grid.ColumnSpan="2" Source="Images/medicine.png" Height="60" Width="60">
+                            <Image.Triggers>
+                                <EventTrigger RoutedEvent="MouseEnter">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Duration="0:0:0.100" Storyboard.TargetProperty="Height" To="80"/>
+                                            <DoubleAnimation Duration="0:0:0.100" Storyboard.TargetProperty="Width" To="80"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                                <EventTrigger RoutedEvent="MouseLeave">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Duration="0:0:0.100" Storyboard.TargetProperty="Height" To="60"/>
+                                            <DoubleAnimation Duration="0:0:0.100" Storyboard.TargetProperty="Width" To="60"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </Image.Triggers>
+                        </Image>
+                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Grid>
+                </StackPanel>
+                <!--Lista de Medicamentos Ordenada alfabéticamente-->
+                <StackPanel DockPanel.Dock="Right">
+                    <!--Medicamento existe-->
+                    <Grid Height="60">
+                        <Grid.Resources>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="TextWrapping" Value="Wrap"/>
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="FontWeight" Value="SemiBold"/>
+                                <Setter Property="FontSize" Value="13"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Foreground" Value="LightGray"/>
+                                    </Trigger>
+                                    <EventTrigger RoutedEvent="MouseEnter">
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation Duration="0:0:0.100" Storyboard.TargetProperty="FontSize" To="15"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
+                                    <EventTrigger RoutedEvent="MouseLeave">
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation Duration="0:0:0.100" Storyboard.TargetProperty="FontSize" To="13"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Grid.Resources>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Buscar Medicamento (nombre):"/>
+                        <TextBox Background="Transparent" Grid.Column="1" VerticalAlignment="Center" Height="30" Margin="5,0,5,0" BorderThickness="0,0,0,2" BorderBrush="AliceBlue"
+                                 FontSize="15" x:Name="p_txtbox_elementexists">
+                            <TextBox.Style>
+                                <Style TargetType="TextBox">
+                                    <Setter Property="Foreground" Value="White"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Foreground" Value="LightGray"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBox.Style>
+                        </TextBox>
+                        <Button Grid.Column="2" Content="Existe" FontWeight="SemiBold" x:Name="p_btn_elementExists">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="FontSize" Value="12"/>
+                                    <Setter Property="Foreground" Value="White"/>
+                                    <Setter Property="Background" Value="#8A67EF"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border Background="{TemplateBinding Background}" CornerRadius="10" Height="50" Width="90">
+                                                    <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#5131AB"/>
+                                            <Setter Property="Foreground" Value="LightGray"/>
+                                        </Trigger>
+                                        <EventTrigger RoutedEvent="MouseEnter">
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimation Duration="0:0:0.100" Storyboard.TargetProperty="FontSize" To="14"/>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </EventTrigger>
+                                        <EventTrigger RoutedEvent="MouseLeave">
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimation Duration="0:0:0.100" Storyboard.TargetProperty="FontSize" To="12"/>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </EventTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                        <TextBlock TextWrapping="Wrap" Grid.Column="3" x:Name="p_txt_elementFound"/>
+                    </Grid>
+                    <!--Eliminar medicamento-->
+                    <Grid Height="60">
+                        <Grid.Resources>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="TextWrapping" Value="Wrap"/>
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="FontWeight" Value="SemiBold"/>
+                                <Setter Property="FontSize" Value="13"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Foreground" Value="LightGray"/>
+                                    </Trigger>
+                                    <EventTrigger RoutedEvent="MouseEnter">
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation Duration="0:0:0.100" Storyboard.TargetProperty="FontSize" To="15"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
+                                    <EventTrigger RoutedEvent="MouseLeave">
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation Duration="0:0:0.100" Storyboard.TargetProperty="FontSize" To="13"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Grid.Resources>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Eliminar Medicina(código):"/>
+                        <TextBox Background="Transparent" Grid.Column="1" VerticalAlignment="Center" Height="30" Margin="5,0,5,0" BorderThickness="0,0,0,2" BorderBrush="AliceBlue"
+                                 FontSize="15" x:Name="p_txtbox_eliminarMedicamento">
+                            <TextBox.Style>
+                                <Style TargetType="TextBox">
+                                    <Setter Property="Foreground" Value="White"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Foreground" Value="LightGray"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBox.Style>
+                        </TextBox>
+                        <Button Grid.Column="2" Content="Eliminar" FontWeight="SemiBold" x:Name="p_btn_eliminarmedicamento">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="FontSize" Value="12"/>
+                                    <Setter Property="Foreground" Value="White"/>
+                                    <Setter Property="Background" Value="#8A67EF"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border Background="{TemplateBinding Background}" CornerRadius="10" Height="50" Width="90">
+                                                    <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#5131AB"/>
+                                            <Setter Property="Foreground" Value="LightGray"/>
+                                        </Trigger>
+                                        <EventTrigger RoutedEvent="MouseEnter">
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimation Duration="0:0:0.100" Storyboard.TargetProperty="FontSize" To="14"/>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </EventTrigger>
+                                        <EventTrigger RoutedEvent="MouseLeave">
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimation Duration="0:0:0.100" Storyboard.TargetProperty="FontSize" To="12"/>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </EventTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                        <TextBlock TextWrapping="Wrap" Grid.Column="3" x:Name="p_txt_elementoEliminadoGlobo"/>
+                    </Grid>
+                    <!--ListView de medicamentos-->
+                    <ListView Width="575" Height="245" Margin="0,10,0,0" Background="Transparent" BorderBrush="Transparent" x:Name="p_ListView_medicine" ItemsSource="{Binding ElementName=MyWindow, Path=p_medicines}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Margin="0,5,0,5" Width="525" Height="110">
+                                    <Grid.Resources>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="Foreground" Value="White"/>
+                                            <Setter Property="FontWeight" Value="SemiBold"/>
+                                            <Setter Property="FontSize" Value="12.5"/>
+                                            <Setter Property="TextWrapping" Value="Wrap"/>
+                                        </Style>
+                                    </Grid.Resources>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Text="nombre:" Grid.Row="0" Grid.Column="0" x:Name="txt1"/>
+                                    <TextBlock Text="{Binding P_name}" Grid.Row="0" Grid.Column="1" x:Name="txt2"/>
+                                    <TextBlock Text="código:" Grid.Row="1" Grid.Column="0" x:Name="txt3"/>
+                                    <TextBlock Text="{Binding P_code}" Grid.Row="1" Grid.Column="1" x:Name="txt4"/>
+                                    <TextBlock Text="cantidad:" Grid.Row="2" Grid.Column="0" x:Name="txt5"/>
+                                    <TextBlock Text="{Binding P_count}" Grid.Row="2" Grid.Column="1" x:Name="txt6"/>
+                                    <TextBlock Text="monto invertido:" Grid.Row="3" Grid.Column="0" x:Name="txt7"/>
+                                    <TextBlock Text="{Binding P_investedAmount}" Grid.Row="3" Grid.Column="1" x:Name="txt8"/>
+                                    <TextBlock Text="precio unitario:" Grid.Row="4" Grid.Column="0" x:Name="txt9"/>
+                                    <TextBlock Text="{Binding P_unitPrice}" Grid.Row="4" Grid.Column="1" x:Name="txt10"/>
+                                    <Image Grid.RowSpan="5" Grid.Row="0" Grid.Column="2" Source="Images/medicine.png" Height="95" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="p_img_medicine"/>
+                                    <Grid.Triggers>
+                                        <EventTrigger RoutedEvent="MouseEnter">
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimation Duration="0:0:0.100" Storyboard.TargetName="txt1" Storyboard.TargetProperty="FontSize" To="14"/>
+                                                    <DoubleAnimation Duration="0:0:0.100" Storyboard.TargetName="txt2" Storyboard.TargetProperty="FontSize" To="14"/>
+                                                    <DoubleAnimation Duration="0:0:0.100" Storyboard.TargetName="txt3" Storyboard.TargetProperty="FontSize" To="14"/>
+                                                    <DoubleAnimation Duration="0:0:0.100" Storyboard.TargetName="txt4" Storyboard.TargetProperty="FontSize" To="14"/>
+                                                    <DoubleAnimation Duration="0:0:0.100" Storyboard.TargetName="txt5" Storyboard.TargetProperty="FontSize" To="14"/>
+                                                    <DoubleAnimation Duration="0:0:0.100" Storyboard.TargetName="txt6" Storyboard.TargetProperty="FontSize" To="14"/>
+                                                    <DoubleAnimation Duration="0:0:0.100" Storyboard.TargetName="txt7" Storyboard.TargetProperty="FontSize" To="14"/>
+                                                    <DoubleAnimation Duration="0:0:0.100" Storyboard.TargetName="txt8" Storyboard.TargetProperty="FontSize" To="14"/>
+                                                    <DoubleAnimation Duration="0:0:0.100" Storyboard.TargetName="txt9" Storyboard.TargetProperty="FontSize" To="14"/>
+                                                    <DoubleAnimation Duration="0:0:0.100" Storyboard.TargetName="txt10" Storyboard.TargetProperty="FontSize" To="14"/>
+                                                    <DoubleAnimation Duration="0:0:0.100" Storyboard.TargetName="p_img_medicine" Storyboard.TargetProperty="Height" To="110"/>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </EventTrigger>
+                                        <EventTrigger RoutedEvent="MouseLeave">
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimation Duration="0:0:0.100" Storyboard.TargetName="txt1" Storyboard.TargetProperty="FontSize" To="12.5"/>
+                                                    <DoubleAnimation Duration="0:0:0.100" Storyboard.TargetName="txt2" Storyboard.TargetProperty="FontSize" To="12.5"/>
+                                                    <DoubleAnimation Duration="0:0:0.100" Storyboard.TargetName="txt3" Storyboard.TargetProperty="FontSize" To="12.5"/>
+                                                    <DoubleAnimation Duration="0:0:0.100" Storyboard.TargetName="txt4" Storyboard.TargetProperty="FontSize" To="12.5"/>
+                                                    <DoubleAnimation Duration="0:0:0.100" Storyboard.TargetName="txt5" Storyboard.TargetProperty="FontSize" To="12.5"/>
+                                                    <DoubleAnimation Duration="0:0:0.100" Storyboard.TargetName="txt6" Storyboard.TargetProperty="FontSize" To="12.5"/>
+                                                    <DoubleAnimation Duration="0:0:0.100" Storyboard.TargetName="txt7" Storyboard.TargetProperty="FontSize" To="12.5"/>
+                                                    <DoubleAnimation Duration="0:0:0.100" Storyboard.TargetName="txt8" Storyboard.TargetProperty="FontSize" To="12.5"/>
+                                                    <DoubleAnimation Duration="0:0:0.100" Storyboard.TargetName="txt9" Storyboard.TargetProperty="FontSize" To="12.5"/>
+                                                    <DoubleAnimation Duration="0:0:0.100" Storyboard.TargetName="txt10" Storyboard.TargetProperty="FontSize" To="12.5"/>
+                                                    <DoubleAnimation Duration="0:0:0.100" Storyboard.TargetName="p_img_medicine" Storyboard.TargetProperty="Height" To="100"/>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </EventTrigger>
+                                    </Grid.Triggers>
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListView>
+                </StackPanel>
+            </DockPanel>
+        </Grid>
+    </Border>
+</Window>
